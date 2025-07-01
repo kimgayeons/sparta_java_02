@@ -17,8 +17,10 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import lombok.AccessLevel;
 import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
+import org.apache.commons.lang3.ObjectUtils;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
@@ -29,6 +31,8 @@ import org.hibernate.annotations.UpdateTimestamp;
 @DynamicInsert
 @DynamicUpdate
 @NoArgsConstructor
+@Getter
+//@Data는 쓰지 말기 Getter, setter도 있고, setter를 제어할 수 없기 때문에 가능하면 사용하지 말기
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class Purchase { //주문
 
@@ -63,4 +67,18 @@ public class Purchase { //주문
     this.totalPrice = totalPrice;
     this.status = status;
   }
+
+  public void setStatus(PurchaseStatus status) {
+    if (!ObjectUtils.isEmpty(status)) {
+      this.status = status;
+    }
+  }
+
+  //null을 혀용하는 경우는 @Setter을 사용해도 되지만
+  // 유효성 체크를 해줘야 하는 경우가 많기 때문에 setter에 하나씩 제약조건을 넣어준다
+//  public void setTotalPrice(BigDecimal totalPrice) {
+//    if(totalPrice > 0){
+//    this.totalPrice = totalPrice;
+//    }
+//  }
 }

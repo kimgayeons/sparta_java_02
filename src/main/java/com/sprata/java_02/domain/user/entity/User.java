@@ -9,6 +9,7 @@ import jakarta.persistence.Table;
 import java.time.LocalDateTime;
 import lombok.AccessLevel;
 import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.hibernate.annotations.CreationTimestamp;
@@ -20,6 +21,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 @Table(name = "user")//클래스명과 테이블명이 같을 경우 생략 가능
 @DynamicUpdate//기존에 있는거랑 비교해서 값이 같은 경우는 UPDATE하지 않고, 값이 변경된것만 값을 UPDATE해준다
 @DynamicInsert
+@Getter
 @NoArgsConstructor//빈생성자
 //@AllArgsConstructor//모든 필드를 가지고 있는 생성자
 //@RequiredArgsConstructor//private만 생성자로 만들어주는 어노테이션
