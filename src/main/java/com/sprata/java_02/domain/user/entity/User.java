@@ -1,12 +1,17 @@
 package com.sprata.java_02.domain.user.entity;
 
+import com.sprata.java_02.domain.purchase.entity.Purchase;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -54,6 +59,9 @@ public class User {
   @Column
   @UpdateTimestamp
   LocalDateTime updatedAt;
+
+  @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+  List<Purchase> purchases = new ArrayList<>();
 
   @Builder
   public User(String name, String email, String passwordHash) {

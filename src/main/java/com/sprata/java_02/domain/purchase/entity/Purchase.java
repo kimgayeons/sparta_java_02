@@ -40,7 +40,7 @@ public class Purchase { //주문
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   long id;
 
-  @ManyToOne(fetch = FetchType.LAZY)
+  @ManyToOne(fetch = FetchType.EAGER)
   @JoinColumn(name = "user_id", nullable = false)
   User user;
 

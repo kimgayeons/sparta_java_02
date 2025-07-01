@@ -5,6 +5,7 @@ import com.sprata.java_02.domain.purchase.entity.Purchase;
 import com.sprata.java_02.domain.user.entity.User;
 import com.sprata.java_02.domain.user.repository.UserRepository;
 import java.math.BigDecimal;
+import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -81,5 +82,19 @@ public class PurchaseRepositoryTest {
         .orElseThrow(() -> new RuntimeException("주문내역이 없음!"));
     //orElseThrow: findById(11L) 해서 나온 결과값이 없을 경우 에러 발생
     System.out.println("결과 : " + purchase.getTotalPrice());
+  }
+
+  @Test
+  void find2() {
+    userRepository.findAllByWithPurchases();
+  }
+
+  @Test
+  void find3() {
+    List<Purchase> purchases = purchaseRepository.findAll();
+    for (Purchase purchase : purchases) {
+      String name = purchase.getUser().getName();
+      System.out.println("name값 : " + name);
+    }
   }
 }

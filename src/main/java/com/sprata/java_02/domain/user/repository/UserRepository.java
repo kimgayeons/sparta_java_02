@@ -1,6 +1,7 @@
 package com.sprata.java_02.domain.user.repository;
 
 import com.sprata.java_02.domain.user.entity.User;
+import java.util.List;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -22,4 +23,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
   //위에랑 같은 코드다
   Optional<User> findFirstByNameAndEmail(String name, String email);
 
+  @Query("SELECT u FROM User u JOIN FETCH u.purchases")
+  List<User> findAllByWithPurchases();
 }
