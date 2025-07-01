@@ -1,4 +1,4 @@
-package com.sprata.java_02.domain.purchase;
+package com.sprata.java_02.domain.purchase.entity;
 
 import com.sprata.java_02.common.enums.PurchaseStatus;
 import com.sprata.java_02.domain.user.entity.User;
