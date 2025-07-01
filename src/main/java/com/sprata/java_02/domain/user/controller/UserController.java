@@ -1,10 +1,11 @@
 package com.sprata.java_02.domain.user.controller;
 
+import com.sprata.java_02.common.response.ApiResponse;
 import com.sprata.java_02.domain.user.dto.UserCreateRequest;
 import com.sprata.java_02.domain.user.dto.UserSearchResponse;
 import com.sprata.java_02.domain.user.service.UserService;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -26,10 +27,10 @@ public class UserController {
 
   @GetMapping("/{userId}")
   //GET /api/users/12?email="asd@naver.com"
-  public ResponseEntity<UserSearchResponse> findAll(
-      @RequestParam(name = "email", required = false) String email,
-      @PathVariable Long userId) {
-    return ResponseEntity.ok().body(UserSearchResponse.builder().build());
+  public ApiResponse<List<UserSearchResponse>> findAll(
+      @PathVariable Long userId,
+      @RequestParam(name = "email", required = false) String email) {
+    return ApiResponse.success(userService.searchAll(userId));
   }
 
   @PostMapping
